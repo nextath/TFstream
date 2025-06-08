@@ -1,0 +1,110 @@
+body {
+  background-color: #171717;
+  border-width: 0;
+  margin: 0px;
+}
+h1 {
+  color: whitesmoke;
+  font-size: 48px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.icon{
+  height: 35px;
+  margin-right: 3px;
+}
+.txt{
+  margin-top: -15px;
+  margin-bottom: 40px;
+  color: whitesmoke;
+  font-size: 27px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+.header {
+  background-color: #0b0b0b;
+  height: 150px;
+  width: 100%;
+  box-shadow: 0px 6px 20px #0b0b0b;
+}
+.header p {
+  position: absolute;
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  margin-top: 65px;
+  right: 40px;
+}
+.logo {
+  height: 100px;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.view {
+  height: 300px;
+  width: 300px;
+  background-color: #0b0b0b;
+  position: absolute;
+  margin-top: 50px;
+  left: 50px;
+}
+
+.iconsMenu {
+  position: absolute;
+  opacity: 30%;
+  width: 100px;
+  margin-left: 8px;
+}
+
+.sender {
+  height: 300px;
+  width: 300px;
+  background-color: #0b0b0b;
+  position: absolute;
+  margin-top: 50px;
+  left: 400px;
+}
+.panel {
+  height: 300px;
+  width: 300px;
+  background-color: #0b0b0b;
+  position: absolute;
+  margin-top: 50px;
+  left: 750px;
+}
+.settings {
+  height: 300px;
+  width: 300px;
+  background-color: #0b0b0b;
+  position: absolute;
+  margin-top: 50px;
+  left: 1100px;
+}
+
+footer {
+  background-color: #0b0b0b;
+  color: white;
+  text-align: center;
+  line-height: 10px;
+  height: 45px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
+footer p {
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  display: inline-block;
+  vertical-align: middle;
+}

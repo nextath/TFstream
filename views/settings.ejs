@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVENT SETTINGS - TFstream</title>
+    <script src="/js/settings.js"></script>
+    <link rel="stylesheet" href="/css/settings.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="/"><img src="/img/tfstream.png" class="logo" /></a>
+      <p><i>EVENT MANAGEMENT</i></p>
+    </div>
+    <h1><img class="icon" src="/img/icons/settings.png" />EVENT SETTINGS</h1>
+    <div class="content">
+      <h2 class="general">General INFO</h2>
+      <hr />
+      <h3>NAME: <input type="text" name="name" id="name" /></h3>
+      <h3>WEBSITE: <input type="text" name="name" id="website" /></h3>
+      <h3>LOGO: <input type="text" name="name" id="logo" /></h3>
+      <h3>LIF/EVT PATH: <input type="text" name="name" id="path" /></h3>
+      <h3>IRUNNING RACE ID: <input type="text" name="name" id="irunning" /></h3>
+      <p></p>
+      <h2 class="general">Portal SETTINGS</h2>
+      <hr />
+      <h3>WEB PORT: <input type="number" name="webport" id="webport" /></h3>
+      <h3>WS URL: <input type="text" name="wsurl" id="wsurl" /></h3>
+      <h3>WS PORT: <input type="number" name="wsport" id="wsport" /></h3>
+      <div class="notice"><p><img src="/img/icons/notice.png"/> To save the portal settings restart the NodeJS server</p></div>
+      <p></p>
+      <h2 class="general">Race INFO</h2>
+      <hr />
+      <p></p>
+
+
+      <div id="container"></div>
+
+      <button class="addButton" id="addButton">+</button>
+      <button class="save" id="submitButton">SAVE</button>
+      <div class="success" id="success"><p><img src="/img/icons/tick.png"/> The changes have been saved successfully</p></div>
+      <div class="error" id="error"><p><img src="/img/icons/error.png"/> There was a problem saving your changes. Open the console for details</p></div>
+      <br>
+    </div>
+    <footer>
+        <p>   </p>
+        <p>TFstream Event Management System - © ATHLES.NET</p>
+    </footer>
+
+  </body>
+</html>

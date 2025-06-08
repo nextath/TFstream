@@ -1,291 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panel - TFstream</title>
+    <title>PANEL - TFstream</title>
+    <script src="/js/panel.js"></script>
+    <link rel="stylesheet" href="/css/panel.css" />
   </head>
   <body>
-    <div class="div">
-      <h1>Track EVENT - Results</h1>
-      <select name="Event" class="select" id="event">
-        <option value="001">100mt M</option>
-        <option value="002">100mt F</option>
-        <option value="003">110Hs M</option>
-        <option value="004">100Hs F</option>
-        <option value="005">200mt M</option>
-        <option value="006">200mt F</option>
-        <option value="007">400mt M</option>
-        <option value="008">400mt F</option>
-        <option value="101">100mt M - OPEN</option>
-        <option value="201">100mt F - OPEN</option>
-        <option value="102">200mt M - OPEN</option>
-        <option value="202">200mt F - OPEN</option>
-        <option value="103">400mt M - OPEN</option>
-        <option value="203">400mt F - OPEN</option>
+    <div class="header">
+      <a href="/"><img src="/img/tfstream.png" class="logo" /></a>
+      <h1 class="title">
+        <img class="icon" src="/img/icons/panel.png" />PANEL
+      </h1>
+      <p><i>EVENT MANAGEMENT</i></p>
+    </div>
 
+    <div class="div" id="titleDiv">
+      <h2 class="divTitle">TITLE</h2>
+      <select name="titleSelect" id="titleSelect"></select>
+      <select name="roundTitle" id="roundTitle">
+
+        <option value="3">NO ROUND</option>
+            <option value="1">HEATS</option>
+            <option value="2">FINAL</option>
+            
       </select>
+      <button class="showTitle" id="showTitle">SHOW</button>
+      <button class="hideTitle" id="hideTitle">HIDE</button>
+      <p></p>
+    </div>
 
-      <select name="Round" class="select" id="round">
-        <option value="1">batterie / serie</option>
-        <option value="2">finali</option>
+    <div class="div" id="chronoDiv">
+      <h2 class="divTitle">CHRONOMETER</h2>
+      <button class="showTitle" id="showChrono">SHOW</button>
+      <button class="showTitle" id="startChrono">START</button>
+      <button class="hideTitle" id="hideChrono">HIDE</button>
+      <p></p>
+    </div>
+
+    <div class="div" id="trackResDiv">
+        <h2 class="divTrackRes">TRACK RESULTS</h2>
+        <select name="trackResSelect" id="trackResSelect"></select>
+        <select name="trackResRound" id="trackResRound">
+              <option value="1">HEATS</option>
+              <option value="2">FINAL</option>
+        </select>
+        <select name="trackResHeats" id="trackResHeats">
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
       </select>
-
-      <select name="Serie" class="select" id="serie">
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        <option value="04">4</option>
-        <option value="05">5</option>
-        <option value="06">6</option>
-        <option value="07">7</option>
-        <option value="08">8</option>
-        <option value="09">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-      </select>
-
-      <button class="btn" id="resultsSHOWbtn">SHOW</button>
-
+        <button class="showTrackRes" id="showTrackRes">SHOW</button>
+        <p></p>
+        <div class="error" id="error"><p><img src="/img/icons/error.png"/> Results not yet processed</p></div>
       </div>
-      <p id="alert" style="color: darkred; display: none;"><b>I risultati di questa gara non sono ancora stati elaborati!</b></p>
-    
 
-    <div class="div">
-      <h1>Long Jump - Results</h1>
-      <h3>Previus: (result)</h3>
-      <p id="previusLJ"></p>
-      <h3>Next: </h3>
-      <p id="nextLJ"></p>
+      <div class="div" id="nostadiaDiv">
+        <h2 class="divNostadia">NOSTADIA RESULTS</h2>
+        <select name="nostadiaSelect" id="nostadiaSelect"></select>
+  
+        <button class="showNostadia" id="showNostadia">SHOW</button>
+        <p></p>
+        <div class="error" id="errorNostadia"><p><img src="/img/icons/error.png"/> No existing result. Check if the iRunning race ID is valid.</p></div>
+      </div>
 
-
-      <button class="btn" id="previusLJbtn"> <-PREVIUS </button>
-      <button class="btn" id="nextLJbtn"> NEXT-> </button>
-    </div>
-
-    <div class="div">
-      <h1>Triple Jump - Results</h1>
-      <h3>Previus: (result)</h3>
-      <p id="previusTJ"></p>
-      <h3>Next: </h3>
-      <p id="nextTJ"></p>
-
-
-      <button class="btn" id="previusTJbtn"> <-PREVIUS </button>
-      <button class="btn" id="nextTJbtn"> NEXT-> </button>
-    </div>
-
-    <div class="div">
-      <h1>Track EVENT - Startlits</h1>
-      <select name="Event" class="select" id="eventStart">
-        <option value="001">100mt M</option>
-        <option value="002">100mt F</option>
-        <option value="003">110Hs M</option>
-        <option value="004">100Hs F</option>
-        <option value="005">200mt M</option>
-        <option value="006">200mt F</option>
-        <option value="007">400mt M</option>
-        <option value="008">400mt F</option>
-        <option value="101">100mt M - OPEN</option>
-        <option value="201">100mt F - OPEN</option>
-        <option value="102">200mt M - OPEN</option>
-        <option value="202">200mt F - OPEN</option>
-        <option value="103">400mt M - OPEN</option>
-        <option value="203">400mt F - OPEN</option>
-
-      </select>
-
-      <select name="Round" class="select" id="roundStart">
-        <option value="1">batterie / serie</option>
-        <option value="2">finali</option>
-      </select>
-
-      <select name="Serie" class="select" id="serieStart">
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        <option value="04">4</option>
-        <option value="05">5</option>
-        <option value="06">6</option>
-        <option value="07">7</option>
-        <option value="08">8</option>
-        <option value="09">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-      </select>
-
-      <button class="btn" id="startlistSHOWbtn">SHOW</button>
-    </div>
-
-    <style>
-      .div{
-        border-radius: 20px;
-        border-style: solid;
-        border-width: 2px;
-        text-align: center;
-        width: fit-content;
-        margin: 5px;
-      }
-      .div h1{
-        margin: 5px;
-      }
-      .div button{
-        margin: 5px;
-      }
-    </style>
-
-    <script>
-      const socket = new WebSocket("ws://192.168.1.75:8880");
-      const resultsSHOWbtn = document.getElementById("resultsSHOWbtn");
-
-      resultsSHOWbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let event = document.getElementById("event").value;
-          let round = document.getElementById("round").value;
-          let serie = document.getElementById("serie").value;
-
-          console.log("CLICCATO results " + event+"-"+round+"-"+serie)
-          let jsonDATA = {
-            command: "results",
-            event: event,
-            round: round,
-            serie: serie,
-          };
-
-          console.log(jsonDATA)
-          let jsonSEND = JSON.stringify(jsonDATA);
-          socket.send(jsonSEND);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      previusLJbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let jsonDATA = {
-            command: "showLJprevius",
-          };
-
-          let jsonSEND = JSON.stringify(jsonDATA);
-          socket.send(jsonSEND);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      nextLJbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let jsonDATA = {
-            command: "showLJnext",
-          };
-
-          let jsonSEND = JSON.stringify(jsonDATA);
-          socket.send(jsonSEND);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      nextTJbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let jsonDATA = {
-            command: "showTJnext",
-          };
-
-          let jsonSEND = JSON.stringify(jsonDATA);
-          socket.send(jsonSEND);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      previusTJbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let jsonDATA = {
-            command: "showTJprevius",
-          };
-
-          let jsonSEND = JSON.stringify(jsonDATA);
-          socket.send(jsonSEND);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      startlistSHOWbtn.addEventListener("click", () => {
-        if (socket.readyState === WebSocket.OPEN) {
-          let event = document.getElementById("eventStart").value;
-          let round = document.getElementById("roundStart").value;
-          let serie = document.getElementById("serieStart").value;
-          console.log("CLICCATO startlist")
-
-          let jsonDATAstart = {
-            command: "startlist",
-            event: event,
-            round: round,
-            serie: serie,
-          };
-
-          console.log(jsonDATAstart)
-
-          let jsonSENDstart = JSON.stringify(jsonDATAstart);
-          socket.send(jsonSENDstart);
-        } else {
-          alert("La connessione WebSocket non è aperta.");
-        }
-      });
-      socket.addEventListener("message", (event) => {
-        let jsonData = JSON.parse(event.data);
-
-        if (jsonData.command == "LJ") {
-            document.getElementById("previusLJ").textContent = jsonData.name;
-            document.getElementById("nextLJ").textContent = jsonData.nextName;
-        } else if(jsonData.command == "TJ") {
-            document.getElementById("previusTJ").textContent = jsonData.name;
-            document.getElementById("nextTJ").textContent = jsonData.nextName;
-        } else if(jsonData.command == "error" & jsonData.error == "lif") {
-
-          var testo = document.getElementById('alert');
-            testo.style.display = 'block'; // Mostra il testo
-            setTimeout(function() {
-                testo.style.display = 'none'; // Nascondi il testo dopo 5 secondi
-            }, 5000);
-
-        } else {return}
-      })
-    </script>
+    <footer>
+      <p></p>
+      <p>TFstream Event Management System - © ATHLES.NET</p>
+    </footer>
   </body>
 </html>

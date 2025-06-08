@@ -1,0 +1,279 @@
+body {
+  background-color: #171717;
+  border-width: 0;
+  margin: 0px;
+}
+h1 {
+  color: whitesmoke;
+  font-size: 48px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.header {
+  background-color: #0b0b0b;
+  height: 150px;
+  width: 100%;
+  box-shadow: 0px 6px 20px #0b0b0b;
+}
+.header p {
+  position: absolute;
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  margin-top: 65px;
+  right: 40px;
+}
+.logo {
+  height: 100px;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+.content {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #242424;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px #181818;
+  margin-bottom: 40px;
+}
+
+.icon {
+  height: 35px;
+  margin-right: 3px;
+}
+
+.general {
+  color: whitesmoke;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding-top: 20px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+hr {
+  color: lightgray;
+  width: 80%;
+  border-width: 0.5px;
+}
+h3 {
+  color: whitesmoke;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-right: 2px;
+}
+input {
+  font-size: 25px;
+  height: 30px;
+  vertical-align: middle;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.addButton {
+  background-color: #2f48ff;
+  border: 2px solid #0014a8;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  color: white;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
+
+.save {
+  background-color: #00ad05;
+  border: 2px solid #007504;
+  border-radius: 10px;
+  height: 40px;
+  width: 100px;
+  color: white;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 7500;
+  font-style: normal;
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Stile per i div dinamici */
+.dynamic-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px; /* Regola questa dimensione a tuo piacimento */
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #1d1d1d;
+  border: 1px solid #202020;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Centrare le label e gli input */
+.dynamic-div label {
+  color: white;
+  width: 100%;
+  max-width: 400px; /* Imposta una larghezza massima */
+  text-align: left; /* Puoi cambiarlo a center se vuoi */
+  margin-bottom: 10px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+.dynamic-div input {
+  width: 100%;
+  max-width: 400px; /* Imposta una larghezza massima */
+  text-align: left; /* Puoi cambiarlo a center se vuoi */
+  margin-bottom: 10px;
+}
+
+.dynamic-div select {
+  width: 100%;
+  max-width: 400px; /* Imposta una larghezza massima */
+  text-align: left; /* Puoi cambiarlo a center se vuoi */
+  margin-bottom: 10px;
+  font-size: 25px;
+  height: 35px;
+}
+.dynamic-div button {
+  width: 38px;
+  margin-top: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+footer {
+  background-color: #0b0b0b;
+  color: white;
+  text-align: center;
+  line-height: 10px;
+  height: 45px;
+  width: 100%;
+}
+footer p {
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notice {
+  text-align: center;
+  background-color: rgb(118, 118, 118);
+  border-radius: 10px;
+  border: 2px solid #595959;
+  width: 70%; /* Can be in percentage also. */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle;
+  height: 30px;
+}
+.notice p {
+  margin-top: 3px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  vertical-align: middle;
+}
+.notice img {
+  height: 25px;
+  vertical-align: middle;
+}
+
+.success {
+  text-align: center;
+  background-color: rgb(111, 166, 28);
+  border-radius: 10px;
+  border: 2px solid green;
+  width: 70%; /* Can be in percentage also. */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle;
+  height: 30px;
+  display: none;
+}
+.success p {
+  margin-top: 3px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  vertical-align: middle;
+}
+.success img {
+  height: 25px;
+  vertical-align: middle;
+}
+
+.error {
+  text-align: center;
+  background-color: #b70000;
+  border-radius: 10px;
+  border: 2px solid #9c0000;
+  width: 90%; /* Can be in percentage also. */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle;
+  height: 30px;
+  display: none;
+}
+.error p {
+  margin-top: 3px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  vertical-align: middle;
+}
+.error img {
+  height: 25px;
+  vertical-align: middle;
+}

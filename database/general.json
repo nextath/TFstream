@@ -1,0 +1,103 @@
+{
+  "command": "settings",
+  "logo": "",
+  "irunning": "https://irunning.it/api/tv.php?bat_id=",
+  "name": "Meeting di Primavera di Mondovì",
+  "webport": "2087",
+  "wsurl": "ws://localhost",
+  "wsport": "8880",
+  "website": "nebiolo.tv",
+  "path": "/Users/thecasalegno/Documents/CRONO-files/mondovi",
+  "events": [
+    {
+      "name": "100 METERS WOMEN",
+      "short": "100 WOMAN",
+      "id": "D01",
+      "type": "track"
+    },
+    {
+      "name": "100 METERS MEN",
+      "short": "100 MEN",
+      "id": "U01",
+      "type": "track"
+    },
+    {
+      "name": "400 METERS HURDLES WOMEN",
+      "short": "400HS WOMEN",
+      "id": "D05",
+      "type": "track"
+    },
+    {
+      "name": "400 METERS HURDLES MEN",
+      "short": "400HS MEN",
+      "id": "U03",
+      "type": "track"
+    },
+    {
+      "name": "400 METERS HURDLES U18 M",
+      "short": "400HS M U18",
+      "id": "U05",
+      "type": "track"
+    },
+    {
+      "name": "1500 METERS WOMEN",
+      "short": "1500 WOMEN",
+      "id": "D03",
+      "type": "track"
+    },
+    {
+      "name": "800 METERS MEN",
+      "short": "800 MEN",
+      "id": "U06",
+      "type": "track"
+    },
+    {
+      "name": "200 METERS WOMEN ",
+      "short": "200 WOMEN",
+      "id": "D06",
+      "type": "track"
+    },
+    {
+      "name": "200 METERS MEN ",
+      "short": "200 MEN",
+      "id": "U08",
+      "type": "track"
+    },
+    {
+      "name": "3000 METERS STEEPLECHASE WOMEN",
+      "short": "3000ST WOMEN",
+      "id": "D08",
+      "type": "track"
+    },
+    {
+      "name": "3000 METERS STEEPLECHASE MEN",
+      "short": "3000ST MEN",
+      "id": "U09",
+      "type": "track"
+    },
+    {
+      "name": "4x100 METERS RELAY WOMEN",
+      "short": "4x100 WOMEN",
+      "id": "D09",
+      "type": "track"
+    },
+    {
+      "name": "4x100 METERS RELAY MEN",
+      "short": "4x100 MEN",
+      "id": "U10",
+      "type": "track"
+    },
+    {
+      "name": "4x400 METERS RELAY WOMEN",
+      "short": "4x400 WOMEN",
+      "id": "D10",
+      "type": "track"
+    },
+    {
+      "name": "4x400 METERS RELAY MEN",
+      "short": "4x400 MEN",
+      "id": "U11",
+      "type": "track"
+    }
+  ]
+}

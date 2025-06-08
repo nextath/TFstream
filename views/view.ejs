@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"/>
+    <script src="/js/view.js"></script>
+    <link rel="stylesheet" href="/css/view.css" />
+    <title>View - TFstream</title>
+  </head>
+
+  <body>
+    <!--EVENT TITLE-->
+    <div  class="titleBOX" id="box">
+      <h1 class="titleTEXT" id="titleTEXT"></h1>
+    </div>
+
+    <div  class="chronoBOX" id="chronobox">
+      <h1 class="chronoTEXT" id="chronoTEXT"></h1>
+    </div>
+
+    <!--HORIZONTAL JUMPS/TROWS RESULTS-->
+    <div hidden class="hzBOX">
+      <p class="hzRANK" id="hzRANK">6</p>
+      <p class="hzNAME" id="hzNAME">G. CASALEGNO</p>
+      <p class="hzCLUB" id="hzCLUB">Battaglio CUS Torino ASD</p>
+      <div class="hzPB"><p id="hzPB">80.78</p></div>
+      <img style="width: 100%" src="/img/hzBOX.png" />
+      <img class="hzFLAG" id="hzFLAG" src="/img/flags/it.png" />
+      <div class="hzRES">
+        <p class="hzITEM" id="hz1">1.20</p>
+        <p class="hzITEM" id="hz2">13.50</p>
+        <p class="hzITEM" id="hz3">80.68</p>
+        <p style="font-weight: 600" class="hzITEM" id="hz4">80.78</p>
+        <p class="hzITEM" id="hz5">80.68</p>
+        <p style="font-weight: 600; color: #be0000; font-size: 30px" class="hzITEM" id="hz6">X</p>
+      </div>
+    </div>
+
+    <!--VERTICAL JUMPS RESULTS-->
+    <div hidden class="vtBOX">
+      <p class="vtRANK" id="vtRANK">6</p>
+      <p class="vtNAME" id="vtNAME">G. CASALEGNO</p>
+      <p class="vtCLUB" id="vtCLUB">Battaglio CUS Torino ASD</p>
+      <div class="vtPB"><p id="vtPB">1.78</p></div>
+      <img style="width: 100%" src="/img/vtBOX.png" />
+      <img class="vtFLAG" id="vtFLAG" src="/img/flags/it.png" />
+      <div class="vtMIS"><p id="vtPB">1.78</p></div>
+      <div class="vtRES">
+        <div style="background-color: darkred" class="vtITEM" id="vt1"></div>
+        <div style="background-color: darkred" class="vtITEM" id="vt2"></div>
+        <div style="background-color: darkgreen" class="vtITEM" id="vt3"></div>
+      </div>
+    </div>
+
+    <!--HORIZONTAL/VERTICAL JUMPS/TROWS PROVISIONAL LEADERBOARD-->
+    <div hidden class="lbBOX">
+      <p class="lbRANK1" id="lbRANK1">5</p>
+      <p class="lbRANK2" id="lbRANK2">6</p>
+      <p class="lbRANK3" id="lbRANK3">7</p>
+      <p class="lbNAME1" id="lbNAME1">S. MCLAUGHLIN-LEVRONE</p>
+      <p class="lbNAME2" id="lbNAME2">G. CASALEGNO</p>
+      <p class="lbNAME3" id="lbNAME3">G. CASALEGNO</p>
+      <p class="lbCLUB1" id="lbCLUB1">UNITED STATES</p>
+      <p class="lbCLUB2" id="lbCLUB2">Battaglio CUS Torino ASD</p>
+      <p class="lbCLUB3" id="lbCLUB3">Battaglio CUS Torino ASD</p>
+      <div class="lbPB1"><p id="lbPB1">80.78</p></div>
+      <div class="lbPB2"><p id="lbPB2">80.78</p></div>
+      <div class="lbPB3"><p id="lbPB3">80.78</p></div>
+      <img class="lbFLAG1" id="lbFLAG1" src="/img/flags/us.png" />
+      <img class="lbFLAG2" id="lbFLAG2" src="/img/flags/it.png" />
+      <img class="lbFLAG3" id="lbFLAG3" src="/img/flags/it.png" />
+      <img style="width: 100%" src="/img/lbBOX.png" />
+    </div>
+
+    <!--TRACK, THROWS AND JUMPS RESULTS-->
+    <div class="resBOX" id="resBOX"  style="opacity: 0">
+      <h1 class="resTITLE" id="resTitleTEXT"></h1>
+      <p class="resRACE" id="resRACE"></p>
+      <p class="resMARK" id="resMARK">MARK</p>
+      <p class="resINFO" id="resINFO"></p>
+      <img class="resLOGO" id="resLOGO" src=""/>
+      <div class="resDIV" id="resDIV1"></div>
+      <div class="resDIV" id="resDIV2"></div>
+      <div class="resDIV" id="resDIV3"></div>
+      <div class="resDIV" id="resDIV4"></div>
+      <div class="resDIV" id="resDIV5"></div>
+      <div class="resDIV" id="resDIV6"></div>
+      <div class="resDIV" id="resDIV7"></div>
+      <div class="resDIV" id="resDIV8"></div>
+      <div class="resDIV" id="resDIV9"></div>
+      <p class="resRANK" id="resRANK1" style="top: 157px">1</p>
+      <p class="resRANK" id="resRANK2" style="top: 204px">2</p>
+      <p class="resRANK" id="resRANK3" style="top: 249px">3</p>
+      <p class="resRANK" id="resRANK4" style="top: 295px">4</p>
+      <p class="resRANK" id="resRANK5" style="top: 340px">5</p>
+      <p class="resRANK" id="resRANK6" style="top: 387px">6</p>
+      <p class="resRANK" id="resRANK7" style="top: 433px">7</p>
+      <p class="resRANK" id="resRANK8" style="top: 478px">8</p>
+      <img class="resFLAG" id="resFLAG1" style="top: 205px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG2" style="top: 251px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG3" style="top: 296px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG4" style="top: 342px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG5" style="top: 388px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG6" style="top: 435px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG7" style="top: 480px" src="/img/flags/it.png"/>
+      <img class="resFLAG" id="resFLAG8" style="top: 527px" src="/img/flags/it.png"/>
+      <p class="resNAME" style="top: 164px" id="resNAME1"></p>
+      <p class="resNAME" style="top: 210px" id="resNAME2"></p>
+      <p class="resNAME" style="top: 255px" id="resNAME3"></p>
+      <p class="resNAME" style="top: 301px" id="resNAME4"></p>
+      <p class="resNAME" style="top: 347px" id="resNAME5"></p>
+      <p class="resNAME" style="top: 394px" id="resNAME6"></p>
+      <p class="resNAME" style="top: 440px" id="resNAME7"></p>
+      <p class="resNAME" style="top: 485px" id="resNAME8"></p>
+      <p class="resCLUB" style="top: 181px" id="resCLUB1"></p>
+      <p class="resCLUB" style="top: 226px" id="resCLUB2"></p>
+      <p class="resCLUB" style="top: 273px" id="resCLUB3"></p>
+      <p class="resCLUB" style="top: 318px" id="resCLUB4"></p>
+      <p class="resCLUB" style="top: 364px" id="resCLUB5"></p>
+      <p class="resCLUB" style="top: 411px" id="resCLUB6"></p>
+      <p class="resCLUB" style="top: 456px" id="resCLUB7"></p>
+      <p class="resCLUB" style="top: 503px" id="resCLUB8"></p>
+      <p class="resRES" id="resRES1" style="top: 167px"></p>
+      <p class="resRES" id="resRES2" style="top: 214px"></p>
+      <p class="resRES" id="resRES3" style="top: 259px"></p>
+      <p class="resRES" id="resRES4" style="top: 305px"></p>
+      <p class="resRES" id="resRES5" style="top: 350px"></p>
+      <p class="resRES" id="resRES6" style="top: 397px"></p>
+      <p class="resRES" id="resRES7" style="top: 443px"></p>
+      <p class="resRES" id="resRES8" style="top: 488px"></p>
+
+    </div>
+  </body>
+</html>

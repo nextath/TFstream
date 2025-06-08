@@ -1,0 +1,176 @@
+body {
+  background-color: #171717;
+  border-width: 0;
+  margin: 0px;
+}
+.title {
+  left: 45%;
+  position: absolute;
+  font-size: 48px;
+  text-align: center;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  top: 13px;
+}
+.icon {
+  height: 35px;
+  margin-right: 3px;
+}
+.header {
+  background-color: #0b0b0b;
+  height: 150px;
+  width: 100%;
+  box-shadow: 0px 6px 20px #0b0b0b;
+}
+.header p {
+  position: absolute;
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  margin-top: 65px;
+  right: 40px;
+}
+.logo {
+  height: 100px;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+
+.div {
+    text-align: center;
+    width: 500px;
+    background-color: #0b0b0b;
+    position: relative;
+    margin-top: 50px;
+    left: 50px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    height: fit-content
+}
+.divTitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.divTrackRes {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+#trackResDiv button {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+.divNostadia {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+#nostadiaDiv button {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+div select{
+    margin-top: -40px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid #003300;
+}
+.showTitle{
+    margin-top: -40px;
+    font-size: 20px;
+    background-color: darkgreen;
+    border-radius: 5px;
+    border: 1px solid #003300;
+    color: white;
+}
+.hideTitle{
+    margin-top: -40px;
+    font-size: 20px;
+    background-color: darkred;
+    border-radius: 5px;
+    border: 1px solid #5d0000;
+    color: white;
+}
+div button:active{
+    background-color: #003300;
+    border: 1px solid #001600;
+}
+
+.error {
+  text-align: center;
+  background-color: #b70000;
+  border-radius: 10px;
+  border: 2px solid #9c0000;
+  width: 90%; /* Can be in percentage also. */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle;
+  height: 30px;
+  margin-bottom: 20px;
+  display: none;
+}
+.error p {
+  margin-top: 3px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  vertical-align: middle;
+}
+.error img {
+  height: 25px;
+  vertical-align: middle;
+}
+
+
+
+footer {
+  background-color: #0b0b0b;
+  color: white;
+  text-align: center;
+  line-height: 10px;
+  height: 45px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
+footer p {
+  color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
