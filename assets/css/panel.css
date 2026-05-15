@@ -99,6 +99,99 @@ body {
   color: white;
 }
 
+.divFidal {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.divMeteo {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+#fidalDiv button {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+.divBio {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-size: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+#showBio {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+#showMeteo {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+#hzNextShow {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+#hzCurrentShow {
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  border: 1px solid #003300;
+  color: white;
+}
+
+.hzCurrentHide{
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkred;
+  border-radius: 5px;
+  border: 1px solid #5d0000;
+  color: white;
+}
+
+.hzNextHide{
+  margin-top: -40px;
+  font-size: 20px;
+  background-color: darkred;
+  border-radius: 5px;
+  border: 1px solid #5d0000;
+  color: white;
+}
+
 div select{
     margin-top: -40px;
     font-size: 20px;
@@ -173,4 +266,9 @@ footer p {
   font-style: normal;
   display: inline-block;
   vertical-align: middle;
+}
+input {
+  width: 100px;
+  height: 20px;
+  font-size: 20px;
 }

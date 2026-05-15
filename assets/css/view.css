@@ -2,30 +2,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1080;
-  width: 1920;
+  height: 1080px;
+  width: 1920px;
+  margin: 0;
+  overflow: hidden;
 }
 
-
-
-
-/*EVENT TITLE*/
+/* EVENT TITLE */
 .titleBOX {
-  transition: all 1s ease;
-  width: 420px;
-  height: 60px;
+  width: 360px;
+  height: 40px;
   background-color: #02979e;
-  transition: all 0.5s ease;
   position: absolute;
   bottom: 30px;
   left: -500px;
   overflow: hidden;
-
+  z-index: 50;
+  transition: all 0.5s ease;
 }
+
 .titleTEXT {
-    transition: all 1s ease;
   margin-top: 3px;
-  font-size: 48px;
+  font-size: 30px;
   text-align: center;
   color: white;
   font-family: "Montserrat", sans-serif;
@@ -36,31 +34,30 @@ body {
   transition: transform 1s ease;
 }
 
-.titleBOX.show  {
+.titleBOX.show {
   transform: translateX(530px);
 }
+
 .titleBOX.show .titleTEXT {
   transform: translateX(0);
 }
 
-
-
+/* CHRONOMETER */
 .chronoBOX {
-  transition: all 1s ease;
-  width: 200px;
-  height: 60px;
+  width: 150px;
+  height: 40px;
   background-color: #02979e;
-  transition: all 0.5s ease;
   position: absolute;
   bottom: 30px;
-  left: 1990px;
+  left: 2030px;
   overflow: hidden;
-
+  z-index: 50;
+  transition: all 0.5s ease;
 }
+
 .chronoTEXT {
-    transition: all 1s ease;
   margin-top: 3px;
-  font-size: 48px;
+  font-size: 30px;
   text-align: center;
   color: white;
   font-family: "Montserrat", sans-serif;
@@ -71,25 +68,51 @@ body {
   transition: transform 1s ease;
 }
 
-.chronoBOX.show  {
+.chronoBOX.show {
   transform: translateX(-300px);
 }
+
 .chronoBOX.show .chronoTEXT {
   transform: translateX(0);
 }
 
+/* HORIZONTAL JUMPS/THROWS RESULTS */
+.hzSTACK {
+  position: absolute;
+  width: 400px;
+  height: 128px;
+  bottom: 30px;
+  left: 30px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 30;
+}
 
-
-
-
-/*HORIZONTAL JUMPS/TROWS RESULTS*/
 .hzBOX {
   position: absolute;
   width: 400px;
   height: 88px;
-  bottom: 90px;
-  left: 30px;
+  left: 0;
+  bottom: 40px;
+  opacity: 0;
+  transform: translateY(88px);
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+  will-change: transform, opacity;
+  z-index: 10;
 }
+
+.hzBOX.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hzBG {
+  width: 100%;
+  display: block;
+}
+
 .hzRANK {
   color: #1e2857;
   left: 12px;
@@ -98,13 +121,17 @@ body {
   font-size: 30px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
+  z-index: 2;
 }
+
 .hzFLAG {
   width: 25px;
   left: 40px;
-  margin-top: 6px;
+  top: 5px;
   position: absolute;
+  z-index: 0;
 }
+
 .hzNAME {
   color: #1e2857;
   left: 70px;
@@ -113,7 +140,9 @@ body {
   font-size: 20px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
+  z-index: 2;
 }
+
 .hzCLUB {
   color: grey;
   left: 39px;
@@ -122,7 +151,9 @@ body {
   font-size: 16px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
+  z-index: 2;
 }
+
 .hzPB {
   color: white;
   left: 320px;
@@ -134,35 +165,41 @@ body {
   text-align: center;
   height: 40px;
   width: 78px;
+  z-index: 2;
 }
+
 .hzPB p {
   margin-top: 6px;
 }
+
 .hzRES {
-  height: 100px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 38px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0px;
+  padding: 0;
+  z-index: 2;
 }
+
 .hzITEM {
+  top: -2px;
   color: white;
-  bottom: 75px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: px;
   text-align: center;
   font-family: "Ubuntu", sans-serif;
   font-weight: 200;
   font-size: 20px;
+  margin: 0;
 }
 
-
-
-
-/*VERTICAL JUMPS RESULTS*/
+/* VERTICAL JUMPS RESULTS */
 .vtBOX {
   position: absolute;
   width: 400px;
@@ -170,6 +207,7 @@ body {
   bottom: 90px;
   left: 30px;
 }
+
 .vtRANK {
   color: #1e2857;
   left: 12px;
@@ -179,12 +217,14 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
 }
+
 .vtFLAG {
   width: 25px;
   left: 40px;
   margin-top: 6px;
   position: absolute;
 }
+
 .vtNAME {
   color: #1e2857;
   left: 70px;
@@ -194,6 +234,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
 }
+
 .vtCLUB {
   color: grey;
   left: 39px;
@@ -203,6 +244,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
 }
+
 .vtPB {
   color: white;
   left: 320px;
@@ -215,43 +257,51 @@ body {
   height: 40px;
   width: 78px;
 }
+
 .vtPB p {
   margin-top: 6px;
 }
-.vtRES {
-  height: 25px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  width: 120px;
-}
+
 .vtITEM {
-  width: px;
-  bottom: 38px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  left: 71px;
-}
-.vtMIS {
-  margin-left: 0px;
-  color: white;
-  bottom: 26px;
-  margin-left: -6px;
   position: absolute;
-  font-size: 28px;
+  top: 31px;
+  font-size: 20px;
   font-family: "Ubuntu", sans-serif;
-  font-weight: 300;
-  text-align: center;
-  height: 40px;
-  width: 78px;
+  font-weight: 500;
+  color: white;
+}
+#vtITEM1 {
+  left: 18px;
+}
+#vtITEM2 {
+  left: 98px;
+}
+#vtITEM3 {
+  left: 179px;
+}
+#vtITEM4 {
+  left: 259px;
+}
+#vtITEM5 {
+  left: 339px;
+}
+.vtITEMRES1 {
+  position: absolute;
+  top: 23px;
+  left: -5px;
+}
+.vtITEMRES2 {
+  position: absolute;
+  top: 23.8px;
+  left: 11px;
+}
+.vtITEMRES3 {
+  position: absolute;
+  top: 23px;
+  left: 30px;
 }
 
-
-
-
-/*HORIZONTAL/VERTICAL JUMPS/TROWS PROVISIONAL LEADERBOARD*/
+/* HORIZONTAL/VERTICAL JUMPS/THROWS PROVISIONAL LEADERBOARD */
 .lbBOX {
   position: absolute;
   width: 400px;
@@ -259,135 +309,98 @@ body {
   bottom: 133px;
   left: 30px;
 }
-.lbRANK1 {
-  color: #1e2857;
-  left: 12px;
-  margin-top: 6px;
-  position: absolute;
-  font-size: 30px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 700;
-}
-.lbRANK2 {
-  color: #1e2857;
-  left: 12px;
-  margin-top: 50px;
-  position: absolute;
-  font-size: 30px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 700;
-}
+
+.lbRANK1,
+.lbRANK2,
 .lbRANK3 {
   color: #1e2857;
   left: 12px;
-  margin-top: 92px;
   position: absolute;
   font-size: 30px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
 }
-.lbFLAG1 {
-  width: 25px;
-  left: 40px;
+
+.lbRANK1 {
   margin-top: 6px;
-  position: absolute;
 }
-.lbFLAG2 {
-  width: 25px;
-  left: 40px;
+
+.lbRANK2 {
   margin-top: 50px;
-  position: absolute;
 }
+
+.lbRANK3 {
+  margin-top: 92px;
+}
+
+.lbFLAG1,
+.lbFLAG2,
 .lbFLAG3 {
   width: 25px;
   left: 40px;
+  position: absolute;
+}
+
+.lbFLAG1 {
+  margin-top: 6px;
+}
+
+.lbFLAG2 {
+  margin-top: 50px;
+}
+
+.lbFLAG3 {
   margin-top: 94px;
-  position: absolute;
 }
-.lbNAME1 {
-  color: #1e2857;
-  left: 70px;
-  margin-top: 3px;
-  position: absolute;
-  font-size: 20px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
-}
-.lbNAME2 {
-  color: #1e2857;
-  left: 70px;
-  margin-top: 47px;
-  position: absolute;
-  font-size: 20px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
-}
+
+.lbNAME1,
+.lbNAME2,
 .lbNAME3 {
   color: #1e2857;
   left: 70px;
-  margin-top: 91px;
   position: absolute;
   font-size: 20px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
 }
-.lbCLUB1 {
-  color: grey;
-  left: 39px;
-  margin-top: 23px;
-  position: absolute;
-  font-size: 16px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
+
+.lbNAME1 {
+  margin-top: 3px;
 }
-.lbCLUB2 {
-  color: grey;
-  left: 39px;
-  margin-top: 68px;
-  position: absolute;
-  font-size: 16px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
+
+.lbNAME2 {
+  margin-top: 47px;
 }
+
+.lbNAME3 {
+  margin-top: 91px;
+}
+
+.lbCLUB1,
+.lbCLUB2,
 .lbCLUB3 {
   color: grey;
   left: 39px;
-  margin-top: 110px;
   position: absolute;
   font-size: 16px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
 }
-.lbPB1 {
-  color: white;
-  left: 320px;
-  margin-top: 1px;
-  position: absolute;
-  font-size: 28px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
-  text-align: center;
-  height: 40px;
-  width: 78px;
+
+.lbCLUB1 {
+  margin-top: 23px;
 }
-.lbPB1 p {
-  margin-top: 6px;
+
+.lbCLUB2 {
+  margin-top: 68px;
 }
-.lbPB2 {
-  color: white;
-  left: 320px;
-  margin-top: 1px;
-  position: absolute;
-  font-size: 28px;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 500;
-  text-align: center;
-  height: 40px;
-  width: 78px;
+
+.lbCLUB3 {
+  margin-top: 110px;
 }
-.lbPB2 p {
-  margin-top: 50px;
-}
+
+.lbPB1,
+.lbPB2,
 .lbPB3 {
   color: white;
   left: 320px;
@@ -400,14 +413,31 @@ body {
   height: 40px;
   width: 78px;
 }
+
+.lbPB1 p {
+  margin-top: 6px;
+}
+
+.lbPB2 p {
+  margin-top: 50px;
+}
+
 .lbPB3 p {
   margin-top: 92px;
 }
 
+/* TRACK, THROWS AND JUMPS RESULTS */
+.resBOX {
+  opacity: 50%;
+  position: absolute;
+  top: 200px;
+  background-color: #1e2857;
+  height: 639px;
+  width: 1300px;
+  transition: opacity 0.5s ease;
+  z-index: 100;
+}
 
-
-
-/*TRACK, THROWS AND JUMPS RESULTS*/
 .resINFO {
   position: absolute;
   top: 553px;
@@ -416,143 +446,227 @@ body {
   color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  font-style: normal;
   opacity: 0;
   transition: opacity 0.8s ease, transform 0.8s ease;
   transform: translateY(-10px);
   font-style: italic;
 }
 
-.resBOX{
-    opacity: 50%;
-    position: absolute;
-    top: 200px;
-    background-color: #1e2857;
-    height: 639px;
-    width: 1300px;
-    transition: opacity 0.5s ease;
-}
-.resTITLE{
-    margin-top: 50px;
-    margin-left: 60px;
-    font-size: 60px;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-    opacity: 0;
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    transform: translateY(-10px);
-}
-.resRACE{
-    margin-top: -50px;
-    margin-left: 60px;
-    font-size: 36px;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    transform: translateY(-10px);
-}
-.resDIV{
-    margin-top: 45px;
-    margin-left: 60px;
-    width: 90%;
-    border-bottom:  0.4px solid #02979e ;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.resRANK{
-    color: white;
-    margin-left: 65px;
-    font-size: 40px;
-    position: absolute;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.resFLAG{
-    margin-left: 120px;
-    position: absolute;
-    height: 30px;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+.resTITLE {
+  margin-top: 50px;
+  margin-left: 60px;
+  font-size: 60px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(-10px);
 }
 
-.resLOGO{
-  z-index: 0;
-  right: 70px;
-  top: 40px;
-  position: absolute;
-  height: 100px;
+.resRACE {
+  margin-top: -50px;
+  margin-left: 60px;
+  font-size: 36px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(-10px);
+}
+
+.resDIV {
+  margin-top: 45px;
+  margin-left: 60px;
+  width: 90%;
+  border-bottom: 0.4px solid #02979e;
   opacity: 0;
   transform: translateY(-30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.resMARK{
-    color: #02979e;
-    top: 129px;
-    right: 73px;
-    position: absolute;
-    margin-left: 65px;
-    font-size: 30px;
-    position: absolute;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 400;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.resNAME{
-    letter-spacing: -1px;
-    color: white;
-    margin-left: 175px;
-    font-size: 35px;
-    position: absolute;
-    font-family: "Ubuntu", sans-serif;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
 
-}
-.resCLUB{
-    color: lightgray;
-    letter-spacing: -1px;
-    margin-left: 670px;
-    font-size: 25px;
-    position: absolute;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 10;
-    font-style: oblique;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.resRES{
-    color: white;
-    right: 71px;
-    font-size: 33px;
-    position: absolute;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+.resRANK {
+  color: white;
+  margin-left: 65px;
+  font-size: 40px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+.resRANK.resRANK--3 {
+  padding-top: 15px;
+  font-size: 30px;
+  letter-spacing: -0.5px;
+}
+
+.resFLAG {
+  margin-left: 120px;
+  position: absolute;
+  height: 30px;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.resLOGO {
+  vertical-align: middle;
+  max-width: 250px;
+  z-index: 0;
+  right: 60px;
+  top: 50px;
+  position: absolute;
+  max-height: 100px;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
 .resMARK {
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  color: #02979e;
+  top: 129px;
+  right: 73px;
+  margin-left: 65px;
+  font-size: 30px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.resNAME {
+  letter-spacing: -1px;
+  color: white;
+  margin-left: 175px;
+  font-size: 35px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.resCLUB {
+  color: lightgray;
+  letter-spacing: -1px;
+  margin-left: 670px;
+  font-size: 25px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 10;
+  font-style: oblique;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.resRES {
+  color: white;
+  right: 71px;
+  font-size: 33px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .show {
-  opacity: 1 ;
-  transform: translateY(0) ;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pett {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.pett.pett-3 {
+  font-size: 34px;
+  letter-spacing: -0.5px;
+}
+
+/* ATHLETE BIO */
+.bioBOX {
+  width: 620px;
+  height: 80px;
+  background-color: #1e2857;
+  position: absolute;
+  bottom: 30px;
+  overflow: hidden;
+  clip-path: inset(0 50% 0 50%);
+  opacity: 0;
+  transition: clip-path 500ms ease, opacity 200ms ease;
+  will-change: clip-path, opacity;
+}
+
+.bioBOX.is-open {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+.bioFLAG {
+  top: 20px;
+  right: 30px;
+  position: absolute;
+  height: 40px;
+}
+
+.bioNAME {
+  left: 100px;
+  letter-spacing: -1px;
+  color: white;
+  font-size: 35px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  top: -28px;
+}
+
+.bioCLUB {
+  color: lightgray;
+  letter-spacing: -1px;
+  font-size: 25px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 10;
+  font-style: oblique;
+  top: 20px;
+  left: 100px;
+}
+
+.bioPETT {
+  color: white;
+  left: 15px;
+  top: -23px;
+  font-size: 40px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+}
+
+.bioSB {
+  color: white;
+  left: 410px;
+  top: 4px;
+  font-size: 30px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+}
+.bioSBname {
+  color: #02979e;
+  left: 410px;
+  top: -4px;
+  font-size: 20px;
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
 }

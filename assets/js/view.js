@@ -3,6 +3,114 @@ let title;
 var a = 0;
 let intervalId = null; 
 
+let hzState = {
+  eventId: null,
+  currentPett: null,
+  loadingSlot: null
+};
+
+function getFirstEmptyHzSlot(res) {
+  for (let i = 1; i <= 6; i++) {
+    const value = res?.[String(i)];
+
+    if (!value || String(value).trim() === "") {
+      return i;
+    }
+  }
+
+  return null;
+}
+
+function setHzCellValue(slot, value) {
+  const cell = document.getElementById(`hz${slot}`);
+  if (!cell) return;
+
+  cell.innerHTML = "";
+
+  if (String(value).toUpperCase() === "X") {
+    cell.style.fontWeight = 900;
+    cell.style.fontSize = "30px";
+    cell.style.color = "darkred";
+    cell.textContent = "X";
+  } else {
+    cell.style.fontSize = "20px";
+    cell.style.fontWeight = 200;
+    cell.style.color = "white";
+    cell.textContent = value || "";
+  }
+}
+
+function setHzCellLoading(slot) {
+  const cell = document.getElementById(`hz${slot}`);
+  if (!cell) return;
+
+  cell.innerHTML = "";
+  cell.style.fontWeight = 200;
+  cell.style.color = "white";
+
+  const img = document.createElement("img");
+  img.src = "/img/loading.gif";
+  img.style.width = "70px";
+  img.style.display = "block";
+  img.style.margin = "0 auto";
+  img.style.opacity = "1";
+  img.style.transition = "opacity 0.35s ease";
+
+  cell.appendChild(img);
+}
+
+function fadeLoadingToValue(slot, value) {
+  const cell = document.getElementById(`hz${slot}`);
+  if (!cell) return;
+
+  const img = cell.querySelector("img");
+
+  if (img) {
+    img.style.opacity = "0";
+
+    setTimeout(() => {
+      setHzCellValue(slot, value);
+      cell.style.opacity = "0";
+
+      requestAnimationFrame(() => {
+        cell.style.transition = "opacity 0.35s ease";
+        cell.style.opacity = "1";
+      });
+    }, 350);
+  } else {
+    setHzCellValue(slot, value);
+  }
+}
+
+function updateHzRankAndBestFromJson(eventId, currentPett) {
+  fetch("/general.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const gara = data.events.find((event) =>
+        event.id === eventId &&
+        event.type === "hz" &&
+        Array.isArray(event.results)
+      );
+
+      if (!gara || !gara.live) return;
+
+      const atleta = gara.results.find((a) => String(a.pett) === String(currentPett));
+      if (!atleta) return;
+
+      const lb = Array.isArray(gara.live.lb) ? gara.live.lb.map(String) : [];
+      const lbIndex = lb.indexOf(String(currentPett));
+
+      document.getElementById("hzRANK").textContent =
+        lbIndex !== -1 ? String(lbIndex + 1) : "-";
+
+      document.getElementById("hzPB").textContent =
+        atleta.res?.best || "NM";
+    })
+    .catch((error) => {
+      console.error("Errore aggiornamento classifica HZ:", error);
+    });
+}
+
 socket.addEventListener("message", (message) => {
   let jsonIN = JSON.parse(message.data);
 
@@ -210,8 +318,8 @@ socket.addEventListener("message", (message) => {
 
           // Shrink the box back to the original size and change color back
           setTimeout(function () {
-            document.getElementById("box").style.width = "420px";
-            document.getElementById("box").style.height = "60px";
+            document.getElementById("box").style.width = "360px";
+            document.getElementById("box").style.height = "40px";
             document.getElementById("box").style.backgroundColor = "#02979e";
             document.getElementById("box").style.bottom = "30px";
             document.getElementById("box").style.left = "-500px";
@@ -284,7 +392,7 @@ socket.addEventListener("message", (message) => {
                 document.getElementById(`resRANK${f}`).classList.add("show");
 
                 document.getElementById(`resFLAG${f}`).src =
-                  "/img/flags/" + jsonIN.results[a][0].naz_sigla + ".png";
+                  "/img/flags/" + jsonIN.results[a][0].naz_sigla_short + ".png";
                 document.getElementById(`resFLAG${f}`).classList.add("show");
 
                 document.getElementById(`resNAME${f}`).textContent =
@@ -338,10 +446,9 @@ socket.addEventListener("message", (message) => {
 
                 // Shrink the box back to the original size and change color back
                 setTimeout(function () {
-                  document.getElementById("box").style.width = "420px";
-                  document.getElementById("box").style.height = "60px";
-                  document.getElementById("box").style.backgroundColor =
-                    "#02979e";
+                  document.getElementById("box").style.width = "360px";
+                  document.getElementById("box").style.height = "40px";
+                  document.getElementById("box").style.backgroundColor = "#02979e";
                   document.getElementById("box").style.bottom = "30px";
                   document.getElementById("box").style.left = "-500px";
                   document.getElementById("box").style.opacity = "100";
@@ -359,5 +466,285 @@ socket.addEventListener("message", (message) => {
         cycleElements(forTime);
       }, 100);
     }, 300);
+  } else if (jsonIN.command == "show-fidal-view") {
+    document.getElementById("resTitleTEXT").textContent = jsonIN.title;
+    document.getElementById("resINFO").textContent = jsonIN.website;
+    document.getElementById("resLOGO").src = "/img/logo/" + jsonIN.logo;
+  
+    document.getElementById("resRACE").textContent = "STARTLIST";
+    const resMarkEl = document.getElementById("resMARK");
+    if (resMarkEl) resMarkEl.textContent = "SB";
+  
+    // Box grande
+    document.getElementById("box").style.width = "1300px";
+    document.getElementById("box").style.height = "639px";
+    document.getElementById("box").style.backgroundColor = "#1e2857";
+    document.getElementById("box").style.bottom = "241px";
+    document.getElementById("box").style.left = "-220px";
+    document.getElementById("box").style.opacity = "98";
+  
+    // Clear title principale
+    document.getElementById("titleTEXT").innerText = "";
+  
+    setTimeout(function () {
+      document.getElementById("resBOX").style.opacity = 1;
+  
+      setTimeout(function () {
+        document.getElementById("resTitleTEXT").classList.add("show");
+        document.getElementById("resINFO").classList.add("show");
+        document.getElementById("resRACE").classList.add("show");
+        document.getElementById("resMARK").classList.add("show");
+        document.getElementById("resLOGO").classList.add("show");
+  
+        let idx = 0; // indice sui risultati
+        const results = Array.isArray(jsonIN.results) ? jsonIN.results : [];
+        const pages = Math.max(1, Math.ceil(results.length / 8));
+  
+        const duration = 6000;       // quanto restano visibili le righe
+        const elementCount = 8;      // righe per pagina
+        const delayBetweenRows = 60; // effetto cascata
+  
+        function showElements() {
+          for (let f = 1; f <= elementCount; f++) {
+            setTimeout(() => {
+              const row = results[idx];
+              if (!row) return;
+  
+              // Mostra riga (div + separatore)
+              document.getElementById(`resDIV${f}`).classList.add("show");
+              document.getElementById(`resDIV${f + 1}`).classList.add("show");
+  
+              // PETTORALE nel campo rank
+              const el = document.getElementById(`resRANK${f}`);
+              const pett = (row.pett ?? "").toString().trim();
+              
+              el.textContent = pett;
+              
+              // reset: togli eventuali classi di stato precedenti
+              el.classList.remove("resRANK--3", "resRANK--3x");
+              
+              // applica regola
+              if (pett.length >= 3) {
+                el.classList.add("resRANK--3");   // oppure "resRANK--3x"
+              }
+              document.getElementById(`resRANK${f}`).classList.add("show");
+  
+              // Bandiera (se non la mandi, IT)
+              const flag = (row.flag || "IT").toUpperCase();
+              document.getElementById(`resFLAG${f}`).src =
+                "/img/flags/" + flag + ".png";
+              document.getElementById(`resFLAG${f}`).classList.add("show");
+  
+              // Nome atleta
+              document.getElementById(`resNAME${f}`).textContent =
+                (row.atleta || "").toUpperCase();
+              document.getElementById(`resNAME${f}`).classList.add("show");
+  
+              // Società
+              document.getElementById(`resCLUB${f}`).textContent = row.societa || "";
+              document.getElementById(`resCLUB${f}`).classList.add("show");
+  
+              // Risultato = SB
+              document.getElementById(`resRES${f}`).textContent = row.sb || "";
+              document.getElementById(`resRES${f}`).classList.add("show");
+  
+              idx++;
+            }, delayBetweenRows * (f - 1));
+          }
+        }
+  
+        function hideElements() {
+          for (let f = 1; f <= elementCount; f++) {
+            setTimeout(() => {
+              document.getElementById(`resDIV${f}`).classList.remove("show");
+              document.getElementById(`resDIV${f + 1}`).classList.remove("show");
+              document.getElementById(`resRANK${f}`).classList.remove("show");
+              document.getElementById(`resFLAG${f}`).classList.remove("show");
+              document.getElementById(`resNAME${f}`).classList.remove("show");
+              document.getElementById(`resCLUB${f}`).classList.remove("show");
+              document.getElementById(`resRES${f}`).classList.remove("show");
+            }, delayBetweenRows * (f - 1));
+          }
+        }
+  
+        function cycleElements(cycles) {
+          let currentCycle = 0;
+  
+          function runCycle() {
+            if (currentCycle < cycles) {
+              showElements();
+  
+              setTimeout(() => {
+                hideElements();
+                currentCycle++;
+                setTimeout(runCycle, 1000); // pausa tra pagine
+              }, duration);
+            } else {
+              setTimeout(function () {
+                document.getElementById("resBOX").style.opacity = 0;
+  
+                setTimeout(function () {
+                  document.getElementById("box").style.width = "360px";
+                  document.getElementById("box").style.height = "40px";
+                  document.getElementById("box").style.backgroundColor = "#02979e";
+                  document.getElementById("box").style.bottom = "30px";
+                  document.getElementById("box").style.left = "-500px";
+                  document.getElementById("box").style.opacity = "100";
+  
+                  document.getElementById("titleTEXT").innerText = title;
+                }, 300);
+              }, 100);
+            }
+          }
+  
+          runCycle();
+        }
+  
+        cycleElements(pages);
+      }, 100);
+    }, 300);
+  } else if (jsonIN.command == "show-bio-view") {
+    const bioBOX = document.getElementById("bioBOX");
+    const bioNAME = document.getElementById("bioNAME");
+    const bioCLUB = document.getElementById("bioCLUB");
+    const bioPETT = document.getElementById("bioPETT");
+    const bioSB = document.getElementById("bioSB");
+    const bioSBname = document.getElementById("bioSBname");
+    
+    bioSBname.textContent = "SB"
+    bioSB.textContent = jsonIN.sb;
+    bioNAME.textContent = jsonIN.atleta;
+    bioCLUB.textContent =
+  jsonIN.societa.length > 24
+    ? jsonIN.societa.slice(0, 24) + "..."
+    : jsonIN.societa;
+    bioPETT.textContent = jsonIN.pett;
+    bioBOX.classList.add("is-open");
+  } else if (jsonIN.command == "hide-bio-view") {
+    const bioBOX = document.getElementById("bioBOX");
+    bioBOX.classList.remove("is-open");
+  } else if (jsonIN.command == "show-meteo-view") {
+    const bioBOX = document.getElementById("bioBOX");
+    const bioNAME = document.getElementById("bioNAME");
+    const bioCLUB = document.getElementById("bioCLUB");
+    const bioFLAG = document.getElementById("bioFLAG");
+    const bioPETT = document.getElementById("bioPETT");
+    const bioSB = document.getElementById("bioSB");
+    const bioSBname = document.getElementById("bioSBname");
+    
+    bioSBname.textContent = ""
+    bioSB.textContent = ""
+    bioPETT.textContent = ""
+    bioNAME.textContent = jsonIN.title.toUpperCase();
+    bioCLUB.textContent = jsonIN.temp + "º  |  Max: " + jsonIN.tmax + "º  |   Min: "  + jsonIN.tmin + "º  |  Vento: " + jsonIN.wind_kmh + "km/h"
+    bioFLAG.src = "/img/meteo/" + jsonIN.icon + ".png";
+    bioBOX.classList.add("is-open");
+
+
+  }else if (jsonIN.command == "show-hz-view") {
+    const eventId = jsonIN.event || jsonIN.id || "L013.html";
+  
+    fetch("/general.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const gara = data.events.find((event) =>
+          event.id === eventId &&
+          event.type === "hz" &&
+          Array.isArray(event.results)
+        );
+  
+        if (!gara) {
+          console.error("Gara horizontal non trovata:", eventId);
+          return;
+        }
+  
+        if (!gara.live) {
+          console.error("Campo live non presente nella gara:", eventId);
+          return;
+        }
+  
+        // QUI CAMBIA: mostro il NEXT, non il CURRENT
+        const shownPett = String(gara.live.next || "");
+  
+        if (!shownPett) {
+          console.error("Nessun atleta next impostato");
+          return;
+        }
+  
+        const atleta = gara.results.find((a) => String(a.pett) === shownPett);
+  
+        if (!atleta) {
+          console.error("Atleta non trovato con pettorale:", shownPett);
+          return;
+        }
+  
+        hzState.eventId = eventId;
+  
+        // Salvo il pettorale mostrato: quando arriverà send-hz,
+        // jsonIN.current dovrà corrispondere a questo pettorale
+        hzState.currentPett = shownPett;
+  
+        hzState.loadingSlot = getFirstEmptyHzSlot(atleta.res);
+  
+        const lb = Array.isArray(gara.live.lb) ? gara.live.lb.map(String) : [];
+        const lbIndex = lb.indexOf(shownPett);
+  
+        document.getElementById("hzRANK").textContent =
+          lbIndex !== -1 ? String(lbIndex + 1) : "-";
+  
+        document.getElementById("hzNAME").textContent =
+          (atleta.atleta || "").toUpperCase();
+  
+        document.getElementById("hzCLUB").textContent =
+          atleta.societa || "";
+  
+        document.getElementById("hzPB").textContent =
+          atleta.res?.best || "NM";
+
+  
+        for (let i = 1; i <= 6; i++) {
+          const value = atleta.res?.[String(i)] || "";
+  
+          if (hzState.loadingSlot === i) {
+            setHzCellLoading(i);
+          } else {
+            setHzCellValue(i, value);
+          }
+        }
+  
+        const hzBOX = document.querySelector(".hzBOX");
+  
+        if (hzBOX) {
+          hzBOX.classList.add("show");
+        }
+      })
+      .catch((error) => {
+        console.error("Errore caricamento general.json:", error);
+      });
+  } else if (jsonIN.command == "send-hz") {
+    const eventId = jsonIN.event || jsonIN.id || "L013.html";
+    const currentPett = String(jsonIN.current || "");
+    const result = String(jsonIN.res || "").trim().toUpperCase();
+  
+    if (
+      hzState.eventId === eventId &&
+      hzState.currentPett === currentPett &&
+      hzState.loadingSlot &&
+      result
+    ) {
+      fadeLoadingToValue(hzState.loadingSlot, result);
+  
+      hzState.loadingSlot = null;
+  
+      setTimeout(() => {
+        updateHzRankAndBestFromJson(eventId, currentPett);
+      }, 500);
+    }
+  } else if (jsonIN.command === "hide-hz-view") {
+    const hzBOX = document.querySelector(".hzBOX");
+  
+    if (hzBOX) {
+      hzBOX.classList.remove("show");
+    }
   }
 });

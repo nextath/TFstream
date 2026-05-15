@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PANEL - TFstream</title>
-    <script src="/js/panel.js"></script>
     <link rel="stylesheet" href="/css/panel.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/vdp8gyt.css">
   </head>
   <body>
     <div class="header">
@@ -16,85 +16,138 @@
       <p><i>EVENT MANAGEMENT</i></p>
     </div>
 
-    <div class="div" id="titleDiv">
-      <h2 class="divTitle">TITLE</h2>
-      <select name="titleSelect" id="titleSelect"></select>
-      <select name="roundTitle" id="roundTitle">
-
-        <option value="3">NO ROUND</option>
-            <option value="1">HEATS</option>
-            <option value="2">FINAL</option>
-            
-      </select>
-      <button class="showTitle" id="showTitle">SHOW</button>
-      <button class="hideTitle" id="hideTitle">HIDE</button>
-      <p></p>
-    </div>
-
-    <div class="div" id="chronoDiv">
-      <h2 class="divTitle">CHRONOMETER</h2>
-      <button class="showTitle" id="showChrono">SHOW</button>
-      <button class="showTitle" id="startChrono">START</button>
-      <button class="hideTitle" id="hideChrono">HIDE</button>
-      <p></p>
-    </div>
-
-    <div class="div" id="trackResDiv">
-        <h2 class="divTrackRes">TRACK RESULTS</h2>
-        <select name="trackResSelect" id="trackResSelect"></select>
-        <select name="trackResRound" id="trackResRound">
-              <option value="1">HEATS</option>
-              <option value="2">FINAL</option>
+    <table>
+      <tr>
+        <td>    <div class="div" id="titleDiv">
+          <h2 class="divTitle">TITLE</h2>
+          <select name="titleSelect" id="titleSelect"></select>
+          <select name="roundTitle" id="roundTitle">
+    
+            <option value="3">NO ROUND</option>
+                <option value="1">HEATS</option>
+                <option value="2">FINAL</option>
+                
+          </select>
+          <button class="showTitle" id="showTitle">SHOW</button>
+          <button class="hideTitle" id="hideTitle">HIDE</button>
+          <p></p>
+        </div>
+    
+        <div class="div" id="chronoDiv">
+          <h2 class="divTitle">CHRONOMETER</h2>
+          <button class="showTitle" id="showChrono">SHOW</button>
+          <button class="showTitle" id="startChrono">START</button>
+          <button class="hideTitle" id="hideChrono">HIDE</button>
+          <p></p>
+        </div>
+      
+        <div class="div" id="nostadiaDiv">
+          <h2 class="divNostadia">NOSTADIA RESULTS</h2>
+          <select name="nostadiaSelect" id="nostadiaSelect"></select>
+    
+          <button class="showNostadia" id="showNostadia">SHOW</button>
+          <p></p>
+          <div class="error" id="errorNostadia"><p><img src="/img/icons/error.png"/> No existing result. Check if the iRunning race ID is valid.</p></div>
+        </div>
+      </td>
+        <td>    <div class="div" id="trackResDiv">
+          <h2 class="divTrackRes">TRACK RESULTS</h2>
+          <select name="trackResSelect" id="trackResSelect"></select>
+          <select name="trackResRound" id="trackResRound">
+                <option value="1">HEATS</option>
+                <option value="2">FINAL</option>
+          </select>
+          <select name="trackResHeats" id="trackResHeats">
+              <option value="01">1</option>
+              <option value="02">2</option>
+              <option value="03">3</option>
+              <option value="04">4</option>
+              <option value="05">5</option>
+              <option value="06">6</option>
+              <option value="07">7</option>
+              <option value="08">8</option>
+              <option value="09">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
         </select>
-        <select name="trackResHeats" id="trackResHeats">
-            <option value="01">1</option>
-            <option value="02">2</option>
-            <option value="03">3</option>
-            <option value="04">4</option>
-            <option value="05">5</option>
-            <option value="06">6</option>
-            <option value="07">7</option>
-            <option value="08">8</option>
-            <option value="09">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-      </select>
-        <button class="showTrackRes" id="showTrackRes">SHOW</button>
-        <p></p>
-        <div class="error" id="error"><p><img src="/img/icons/error.png"/> Results not yet processed</p></div>
-      </div>
+          <button class="showTrackRes" id="showTrackRes">SHOW</button>
+          <p></p>
+          <div class="error" id="error"><p><img src="/img/icons/error.png"/> Results not yet processed</p></div>
+        </div>
+        <div class="div" id="fidalDiv">
+          <h2 class="divFidal">FIDAL STARTLIST</h2>
+          <select name="fidalSelect" id="fidalSelect"></select>
+    
+          <button class="showFidal" id="showFidal">SHOW</button>
+          <p></p>
+          <div class="error" id="errorFidal"><p><img src="/img/icons/error.png"/> No existing startlist. Check if the Fidal ID is valid.</p></div>
+        </div>
+        <div class="div" id="bioDiv">
+          <h2 class="divBio">FIDAL ATHLETE BIO</h2>
+          <select name="bioSelect" id="bioSelect"></select>
+    
+          <input type="number" name="bioPett" id="bioPett" />
+          <button class="showBio" id="showBio">SHOW</button>
+          <button class="hideTitle" id="hideBio">HIDE</button>
+          <p></p>
+          <div class="error" id="errorBio"><p><img src="/img/icons/error.png"/> No existing athlete. Check if the Fidal ID is valid.</p></div>
+        </div>
+      </td>
+      <td>
+        <div class="div" id="meteoDiv">
+          <h2 class="divMeteo">METEO</h2>
+          <input type="text" name="meteoText" id="meteoText" />
+          <button class="showMeteo" id="showMeteo">SHOW</button>
+          <button class="hideTitle" id="hideMeteo">HIDE</button>
+          <p></p>
+          <div class="error" id="errorMeteo"><p><img src="/img/icons/error.png"/> Error with wheater. Check if the city exists</p></div>
+        </div>
 
-      <div class="div" id="nostadiaDiv">
-        <h2 class="divNostadia">NOSTADIA RESULTS</h2>
-        <select name="nostadiaSelect" id="nostadiaSelect"></select>
-  
-        <button class="showNostadia" id="showNostadia">SHOW</button>
-        <p></p>
-        <div class="error" id="errorNostadia"><p><img src="/img/icons/error.png"/> No existing result. Check if the iRunning race ID is valid.</p></div>
-      </div>
+
+        <div class="div" id="meteoDiv">
+          <h2 class="divMeteo">HORIZONTAL RESULTS</h2>
+          <select name="hzSelect" id="hzSelect"></select>
+          <button class="hzCurrentShow" id="hzCurrentShow">SHOW</button>
+          <button class="hzCurrentHide" id="hzCurrentHide">HIDE</button>
+          <p></p>
+          <div class="error" id="errorMeteo"><p><img src="/img/icons/error.png"/> Error with wheater. Check if the city exists</p></div>
+        </div>
+        <div class="div" id="meteoDiv">
+          <h2 class="divMeteo">VERTICAL RESULTS</h2>
+          <select name="vtSelect" id="vtSelect"></select>
+          <button class="vtCurrentShow" id="vtCurrentShow">SHOW</button>
+          <button class="vtCurrentHide" id="vtCurrentHide">HIDE</button>
+          <p></p>
+          <div class="error" id="errorMeteo"><p><img src="/img/icons/error.png"/> Error with wheater. Check if the city exists</p></div>
+        </div>
+      </td>
+      </tr>
+    </table>
 
     <footer>
       <p></p>
-      <p>TFstream Event Management System - © ATHLES.NET</p>
+      <p>TFstream Event Management System - © NEXTATH</p>
     </footer>
+    <script src="/js/panel.js"></script>
   </body>
+  
 </html>

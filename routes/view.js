@@ -1,6 +1,7 @@
 //define libraries
 const fs = require("fs");
 const path = require("path");
+const cheerio = require("cheerio");
 const csv = require("csv-parser");
 const { countryToAlpha2, countryToAlpha3 } = require("country-to-iso");
 
@@ -20,6 +21,195 @@ router.get("/", (req, res) => {
 
 const WebSocket = require("ws");
 const client = new WebSocket(ws);
+
+function weatherCodeToIcon(code, isDay = 1) {
+  if (code === 0) return isDay ? "clear-day" : "clear-night";
+  if (code === 1 || code === 2) return isDay ? "partly-cloudy-day" : "partly-cloudy-night";
+  if (code === 3) return "cloudy";
+  if (code === 45 || code === 48) return "fog";
+  if ([51, 53, 55, 56, 57].includes(code)) return "drizzle";
+  if ([61, 63, 65, 66, 67].includes(code)) return "rain";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "snow";
+  if ([80, 81, 82].includes(code)) return "rain-showers";
+  if ([95, 96, 99].includes(code)) return "thunderstorm";
+  return "unknown";
+}
+
+function fetchMeteoByItalianCity(city, settings = {}) {
+  const cityRaw = String(city || "").trim();
+  if (!cityRaw) return Promise.resolve(null);
+
+  const geoUrl =
+    "https://geocoding-api.open-meteo.com/v1/search" +
+    `?name=${encodeURIComponent(cityRaw)}` +
+    "&count=1&language=it&format=json&country=IT";
+
+  return fetch(geoUrl, settings)
+    .then((r) => {
+      if (!r.ok) throw new Error(`Geocoding HTTP ${r.status}`);
+      return r.json();
+    })
+    .then((geo) => {
+      const place = geo.results && geo.results[0];
+      if (!place) return null;
+
+      const lat = place.latitude;
+      const lon = place.longitude;
+
+      const meteoUrl =
+        "https://api.open-meteo.com/v1/forecast" +
+        `?latitude=${lat}&longitude=${lon}` +
+        "&current=temperature_2m,weather_code,wind_speed_10m,is_day" +
+        "&daily=temperature_2m_max,temperature_2m_min" +
+        "&timezone=Europe%2FRome";
+
+      return fetch(meteoUrl, settings)
+        .then((r2) => {
+          if (!r2.ok) throw new Error(`Forecast HTTP ${r2.status}`);
+          return r2.json();
+        })
+        .then((meteo) => {
+          const cur = meteo.current || {};
+          const daily = meteo.daily || {};
+
+          const code = cur.weather_code;
+          const isDay = cur.is_day;
+
+          return {
+            query: cityRaw,
+            citta: place.name,
+            provincia: place.admin1 || place.admin2 || "",
+            lat,
+            lon,
+            temp: cur.temperature_2m,
+            tmax: (daily.temperature_2m_max && daily.temperature_2m_max[0]) ?? null,
+            tmin: (daily.temperature_2m_min && daily.temperature_2m_min[0]) ?? null,
+            wind_kmh: cur.wind_speed_10m,
+            code,
+            icon: weatherCodeToIcon(code, isDay), // nome icona
+          };
+        });
+    });
+}
+
+
+
+
+function fetchFidalHtmlTableBio(url, pettIn, settings = {}) {
+  const targetPett = String(pettIn).trim();
+
+  return fetch(url, {
+    ...settings,
+    headers: {
+      "user-agent":
+        (settings.headers && settings.headers["user-agent"]) ||
+        "Mozilla/5.0 (Node.js)",
+      ...(settings.headers || {}),
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
+      return res.text();
+    })
+    .then((html) => {
+      const $ = cheerio.load(html);
+      const $table = $("table.table").first();
+      if (!$table.length) return null;
+
+      let found = null;
+
+      $table.find("tbody tr").each((i, tr) => {
+        if (found) return; // abbiamo già trovato: ignora le altre righe
+
+        const $tr = $(tr);
+        if ($tr.text().includes("Totale:")) return;
+
+        const $tds = $tr.find("td");
+        if ($tds.length < 6) return;
+
+        const pettRow = $tds.eq(0).text().trim();
+        if (pettRow !== targetPett) return;
+
+        const $a = $tds.eq(1).find("a").first();
+        const atleta = ($a.text() || $tds.eq(1).text()).trim();
+
+        const societaSpanText = $tds.eq(4).find("span").first().text().trim();
+        const societa =
+          societaSpanText.length >= 6
+            ? societaSpanText.slice(6).trim()
+            : societaSpanText;
+
+        const sb = $tds.eq(5).text().trim();
+
+        found = { pett: pettRow, atleta, societa, sb };
+      });
+
+      return found; // oggetto oppure null
+    });
+}
+
+
+
+
+function fetchFidalHtmlTable(url, settings = {}) {
+  return fetch(url, {
+    ...settings,
+    // se vuoi essere safe con alcuni siti:
+    headers: {
+      "user-agent":
+        (settings.headers && settings.headers["user-agent"]) ||
+        "Mozilla/5.0 (Node.js)",
+      ...(settings.headers || {}),
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
+      return res.text();
+    })
+    .then((html) => {
+      const $ = cheerio.load(html);
+
+      // selettore tabella: usa quello che hai (class="table ...")
+      const $table = $("table.table").first();
+      if (!$table.length) return [];
+
+      const results = [];
+
+      $table.find("tbody tr").each((i, tr) => {
+        const $tr = $(tr);
+
+        // salta riga "Totale: 35"
+        if ($tr.text().includes("Totale:")) return;
+
+        const $tds = $tr.find("td");
+        if ($tds.length < 6) return;
+
+        const pett = $tds.eq(0).text().trim();
+
+        const $a = $tds.eq(1).find("a").first();
+        const atleta = ($a.text() || $tds.eq(1).text()).trim();
+
+        // PRIMO span di società
+        const societaSpanText = $tds.eq(4).find("span").first().text().trim();
+
+        // togli i primi 6 caratteri "BA005 " (5 + spazio)
+        // (se preferisci più robusto, vedi nota sotto)
+        const societa =
+          societaSpanText.length >= 6 ? societaSpanText.slice(6).trim() : societaSpanText;
+
+        const sb = $tds.eq(5).text().trim(); // può essere ""
+
+        results.push({
+          pett,
+          atleta,
+          societa,
+          sb,
+        });
+      });
+
+      return results;
+    });
+}
 
 client.on("message", (message) => {
   let jsonIN = JSON.parse(message);
@@ -59,6 +249,10 @@ client.on("message", (message) => {
         console.error(parseError);
       }
     });
+
+
+
+    //TRACK RES
   } else if (jsonIN.command == "show-trackres") {
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
@@ -306,6 +500,9 @@ client.on("message", (message) => {
         console.error(parseError);
       }
     });
+
+
+  //NOSTADIA
   } else if (jsonIN.command == "show-nostadia") {
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
@@ -348,7 +545,116 @@ client.on("message", (message) => {
         console.error(parseError);
       }
     });
-  }
+
+
+
+  //SHOW FIDAL
+  } else if (jsonIN.command == "show-fidal") {
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) console.error(err);
+
+    try {
+      jsonDB = JSON.parse(data);
+
+      const url = jsonDB.fidal + jsonIN.id;
+
+      fetchFidalHtmlTable(url, settings)
+        .then((results) => {
+          if (!results || results.length === 0) {
+            client.send(JSON.stringify({ command: "errorFidal" }));
+            return;
+          }
+
+          const schermate = results.length;
+          const forTime = Math.floor(schermate / 8) + 1;
+
+          const jsonDATA = {
+            command: "show-fidal-view",   // metti il command che vuoi
+            title: jsonIN.name,
+            schermate,
+            forTime,
+            results,
+            website: jsonDB.website,
+            logo: jsonDB.logo,
+          };
+
+          client.send(JSON.stringify(jsonDATA));
+        })
+        .catch((e) => {
+          console.error("Errore fetch/parsing FIDAL:", e);
+          client.send(JSON.stringify({ command: "errorFidal" }));
+        });
+    } catch (parseError) {
+      console.error(parseError);
+    }
+  });
+}  else if (jsonIN.command == "show-bio") {
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) console.error(err);
+
+    try {
+      jsonDB = JSON.parse(data);
+
+      const pettIn = jsonIN.pett
+      const url = jsonDB.fidal + jsonIN.id;
+
+      fetchFidalHtmlTableBio(url, pettIn, settings)
+  .then((bio) => {
+    if (!bio) {
+      client.send(JSON.stringify({ command: "errorBio" }));
+      return;
+    }
+
+    client.send(
+      JSON.stringify({
+        command: "show-bio-view",
+        ...bio
+      })
+    );
+  })
+  .catch(console.error);
+    } catch (parseError) {
+      console.error(parseError);
+    }
+  });
+} else if (jsonIN.command == "show-meteo") {
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) console.error(err);
+
+    try {
+      jsonDB = JSON.parse(data);
+
+      const city = jsonIN.text;
+
+      fetchMeteoByItalianCity(city, settings)
+        .then((meteo) => {
+          if (!meteo) {
+            client.send(JSON.stringify({ command: "errorMeteo" }));
+            return;
+          }
+
+          client.send(
+            JSON.stringify({
+              command: "show-meteo-view",
+              title: meteo.citta,
+              query: meteo.query,
+              temp: meteo.temp,
+              tmax: meteo.tmax,
+              tmin: meteo.tmin,
+              wind_kmh: meteo.wind_kmh,
+              icon: meteo.icon,
+            })
+          );
+        })
+        .catch((e) => {
+          console.error("Errore meteo:", e);
+          client.send(JSON.stringify({ command: "errorMeteo" }));
+        });
+    } catch (parseError) {
+      console.error(parseError);
+    }
+  });
+}
 });
 
 module.exports = router;

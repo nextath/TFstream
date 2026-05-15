@@ -277,3 +277,32 @@ footer p {
   height: 25px;
   vertical-align: middle;
 }
+
+.results-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.results-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-align: left;
+}
+
+.results-textarea {
+  width: 100%;
+  min-height: 260px;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 12px;
+  border-radius: 8px;
+  resize: vertical; /* così puoi allungarla solo in altezza */
+}

@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sender - TFstream</title>
+    <link rel="stylesheet" href="/css/sender.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/vdp8gyt.css">
 </head>
 <body>
-    <h1>Hi! I'm SENDER</h1>
-    
+    <div style="text-align: center;">
+        <h1>INVIO RISULTATI SALTI IN ESTENSIONE</h1>
+        <h3>Gara</h3>
+        <select id="event">
+            <option value="L014.html">SALTO TRIPLO UOMINI</option>
+            <option value="L013.html">SALTO IN LUNGO DONNE</option>
+        </select>
+        <h3>Pettorale corrente</h3>
+        <input id="current">
+        <h3>Misura (0.00)</h3>
+        <input id="res">
+        <h3>Pettorale successivo</h3>
+        <input id="next">
+        <br>
+        <br>
+        <button id="send">INVIA</button>
+    </div>
+    <script src="/js/sender.js"></script>
 </body>
 </html>
